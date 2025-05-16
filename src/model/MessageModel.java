@@ -50,14 +50,6 @@ public class MessageModel implements MessageInterface {
      */
     @Override
     public List<Message> getAll() throws ChatException {
-        return getMessages();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<Message> getMessages() throws ChatException {
     	Connection conn = null;
         CallableStatement cstmt = null;
         ResultSet rs = null;
@@ -71,10 +63,7 @@ public class MessageModel implements MessageInterface {
             if (hasResults) {
             	rs = cstmt.getResultSet();
                 while (rs.next()) {
-                    Message msg = new Message();
-                    msg.setNick(rs.getString("nick"));
-                    msg.setMessage(rs.getString("message"));
-                    msg.setTimestamp(rs.getTimestamp("ts"));
+                    Message msg = new Message(rs.getString("nick"), rs.getString("message"), rs.getTimestamp("ts"));
                     messages.add(msg);
                 }
             }
@@ -88,13 +77,10 @@ public class MessageModel implements MessageInterface {
     }
     
     /**
-     * Closes database resources.
-     * 
-     * @param conn The connection to close
-     * @param stmt The statement to close
-     * @param rs The result set to close
+     * {@inheritDoc}
      */
-    private void closeResources(Connection conn, CallableStatement stmt, ResultSet rs) {
+    @Override
+	public void closeResources(Connection conn, CallableStatement stmt, ResultSet rs) {
         try {
             if (conn != null) conn.close();
             if (stmt != null) stmt.close();

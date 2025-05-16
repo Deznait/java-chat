@@ -9,11 +9,6 @@ public class Message {
     private Timestamp timestamp;
 
     /**
-     * Default constructor for the Message class.
-     */
-    public Message() {}
-
-    /**
      * Constructs a Message with the specified sender, content, and timestamp.
      *
      * @param nick The nickname of the sender

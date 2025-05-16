@@ -4,9 +4,7 @@ import model.*;
 import utilities.ChatException;
 import view.ChatView;
 
-import java.awt.event.*;
 import java.util.List;
-import javax.swing.*;
 
 /**
  * Controller class that handles the logic and interactions between the model and the view.
@@ -61,7 +59,7 @@ public class ChatController implements ChatControllerInterface {
      */
     @Override
     public List<Message> getMessages() throws ChatException {
-    	return messageModel.getMessages();
+    	return messageModel.getAll();
     }
     
     /**
@@ -69,7 +67,7 @@ public class ChatController implements ChatControllerInterface {
      */
     @Override
     public List<User> getUsers() throws ChatException {
-    	return userModel.getConnectedUsers();
+    	return userModel.getAll();
     }
     
     /**

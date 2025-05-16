@@ -26,12 +26,4 @@ public interface MessageInterface extends DAO<Message> {
      */
     @Override
     List<Message> getAll() throws ChatException;
-    
-    /**
-     * Alias for getAll() that provides a more descriptive name.
-     * 
-     * @return List of Message objects
-     * @throws ChatException If there is an error retrieving messages
-     */
-    List<Message> getMessages() throws ChatException;
 }

@@ -33,12 +33,4 @@ public interface UserInterface extends DAO<User> {
      */
     @Override
     List<User> getAll() throws ChatException;
-    
-    /**
-     * Alias for getAll() that provides a more descriptive name.
-     * 
-     * @return List of User objects representing connected users
-     * @throws ChatException If there is an error retrieving user data
-     */
-    List<User> getConnectedUsers() throws ChatException;
 }

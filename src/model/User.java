@@ -8,11 +8,6 @@ public class User {
     private Timestamp dateCon;
 
     /**
-     * Default constructor for the User class.
-     */
-    public User() {}
-
-    /**
      * Constructs a User with the specified nickname and connection date.
      *
      * @param nick The user's nickname

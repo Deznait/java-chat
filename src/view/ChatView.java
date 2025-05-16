@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -143,6 +145,14 @@ public class ChatView extends JFrame {
      * Sets up event listeners for UI components.
      */
     private void setupEventListeners() {
+    	// Event listener when closing the Window, in order to disconnect
+    	addWindowListener(new WindowAdapter() {
+    	    @Override
+    	    public void windowClosing(WindowEvent event) {
+    	    	logout();
+    	    }
+    	});
+        
         // Action listener for the send button
         sendButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -187,6 +197,7 @@ public class ChatView extends JFrame {
         String message = messageField.getText().trim();
         if (!message.isEmpty()) {
             controller.sendMessage(message);
+        	updateMessages();
             
             // Clear message input in view
             messageField.setText("");
@@ -198,8 +209,10 @@ public class ChatView extends JFrame {
      * Called periodically by the timer.
      */
     private void update() {
-    	updateMessages();
-    	updateUsers();
+    	if(controller != null) {
+        	updateMessages();
+        	updateUsers();
+    	}
     }
     
     /**

@@ -65,14 +65,6 @@ public class UserModel implements UserInterface {
      */
     @Override
     public List<User> getAll() throws ChatException {
-        return getConnectedUsers();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<User> getConnectedUsers() throws ChatException {
     	Connection conn = null;
         CallableStatement cstmt = null;
         ResultSet rs = null;
@@ -83,9 +75,7 @@ public class UserModel implements UserInterface {
         	cstmt = conn.prepareCall("{call getConnectedUsers()}");
             rs = cstmt.executeQuery();
             while (rs.next()) {
-                User user = new User();
-                user.setNick(rs.getString("nick"));
-                user.setDateCon(rs.getTimestamp("date_con"));
+                User user = new User(rs.getString("nick"), rs.getTimestamp("date_con"));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -98,13 +88,10 @@ public class UserModel implements UserInterface {
     }
     
     /**
-     * Closes database resources.
-     * 
-     * @param conn The connection to close
-     * @param stmt The statement to close
-     * @param rs The result set to close
+     * {@inheritDoc}
      */
-    private void closeResources(Connection conn, CallableStatement stmt, ResultSet rs) {
+    @Override
+	public void closeResources(Connection conn, CallableStatement stmt, ResultSet rs) {
         try {
             if (conn != null) conn.close();
             if (stmt != null) stmt.close();
