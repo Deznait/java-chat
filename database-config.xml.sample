@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database-config>
+    <host>localhost</host>
+    <port>59999</port>
+    <database>db_name</database>
+    <username>user_name</username>
+    <password>user_pass</password>
+</database-config>
